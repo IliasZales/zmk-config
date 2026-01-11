@@ -15,14 +15,18 @@
 };
 
 &i2c1 {
+    compatible = "nordic,nrf-tw-i2c";
     status = "okay";
     pinctrl-0 = <&i2c1_default>;
     pinctrl-names = "default";
 };
 
-&ssd1306 {
-    status = "okay";
-    height = <32>;  /* Für dein 0.91" OLED, ggf. 64 */
-    width = <128>;
-    reg = <0x3C>;  /* Oder 0x3D testen */
+oled: &{/} {
+    oled: ssd1306@3c {
+        compatible = "solomon,ssd1306fb";
+        reg = <0x3c>;
+        height = <32>;  /* Passe an dein OLED an */
+        width = <128>;
+        status = "okay";
+    };
 };
