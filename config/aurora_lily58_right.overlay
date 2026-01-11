@@ -1,17 +1,11 @@
-&{/} {
-    i2c1: i2c1 {
-        compatible = "nordic,nrf-tw-i2c";
-        status = "okay";
-        sda-pin = <26>;   // ProMicro D1 → nice!nano v1 P0.26[web:21][web:26][web:37]
-        scl-pin = <27>;   // ProMicro D0 → nice!nano v1 P0.27[web:21][web:26][web:37]
-    };
+&i2c1 {
+    status = "okay";
+    sda-pin = <26>;  // ProMicro D1 → P0.26
+    scl-pin = <27>;  // ProMicro D0 → P0.27
+};
 
-    oled: ssd1306@3c {
-        compatible = "solomon,ssd1306fb";
-        reg = <0x3c>;
-        width = <128>;
-        height = <32>;    // Für 0.91" 128x32; bei 128x64 → <64>[web:34][web:36]
-        segment-offset = <0>;
-        page-offset = <0>;
-    };
+&ssd1306@3c {
+    status = "okay";
+    width = <128>;
+    height = <32>;   // Dein Amazon-Display
 };
