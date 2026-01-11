@@ -1,0 +1,28 @@
+/ {
+    i2c1_pins: i2c1_pins {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 26)>, <NRF_PSEL(TWIM_SCL, 0, 27)>;
+        };
+    };
+};
+
+&pinctrl {
+    i2c1_default: i2c1_default {
+        group1 {
+            psels = <&i2c1_pins>;
+        };
+    };
+};
+
+&i2c1 {
+    status = "okay";
+    pinctrl-0 = <&i2c1_default>;
+    pinctrl-names = "default";
+};
+
+&ssd1306 {
+    status = "okay";
+    height = <32>;  /* Für dein 0.91" OLED, ggf. 64 */
+    width = <128>;
+    reg = <0x3C>;  /* Oder 0x3D testen */
+};
