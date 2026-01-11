@@ -1,11 +1,23 @@
-&i2c1 {
-    status = "okay";
-    sda-pin = <26>;  // ProMicro D1 → P0.26
-    scl-pin = <27>;  // ProMicro D0 → P0.27
+&pinctrl {
+    i2c1_default: i2c1_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 26)>, <NRF_PSEL(TWIM_SCL, 0, 27)>;
+        };
+    };
 };
 
-&ssd1306@3c {
+&i2c1 {
+    compatible = "nordic,nrf-tw-i2c";
     status = "okay";
+    pinctrl-0 = <&i2c1_default>;
+    pinctrl-names = "default";
+};
+
+oled: ssd1306@3c {
+    compatible = "solomon,ssd1306fb";
+    reg = <0x3c>;
+    segment-offset = <0>;
+    page-offset = <0>;
+    height = <32>;
     width = <128>;
-    height = <32>;   // Dein Amazon-Display
 };
